@@ -46,7 +46,7 @@ describe 'saml2', ->
         assert.equal dom.getElementsByTagNameNS('urn:oasis:names:tc:SAML:2.0:assertion', 'Issuer')[0].firstChild.data, 'https://sp.example.com/metadata.xml'
 
       it 'contains an AuthnContext if requested', ->
-        { id, xml } = saml2.create_authn_request 'a', 'b', 'c', true, { comparison: 'exact', class_refs: ['context:class']}
+        { id, xml } = saml2.create_authn_request 'a', 'b', 'c', true, false,{ comparison: 'exact', class_refs: ['context:class']}
         dom = (new xmldom.DOMParser()).parseFromString xml
         authn_request = dom.getElementsByTagName('AuthnRequest')[0]
 

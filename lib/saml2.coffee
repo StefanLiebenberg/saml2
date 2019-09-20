@@ -520,7 +520,7 @@ module.exports.ServiceProvider =
     create_login_request_url: (identity_provider, options, cb) ->
       options = set_option_defaults options, identity_provider.shared_options, @shared_options
 
-      { id, xml } = create_authn_request @entity_id, @assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format
+      { id, xml } = create_authn_request @entity_id, options.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format
       zlib.deflateRaw xml, (err, deflated) =>
         return cb err if err?
         try
@@ -543,7 +543,7 @@ module.exports.ServiceProvider =
     create_authn_request_xml: (identity_provider, options) ->
       options = set_option_defaults options, identity_provider.shared_options, @shared_options
 
-      { id, xml } = create_authn_request @entity_id, @assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format
+      { id, xml } = create_authn_request @entity_id, options.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format
       return sign_authn_request(xml, @private_key, options)
 
     # Returns:

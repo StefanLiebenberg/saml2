@@ -709,7 +709,7 @@ module.exports.ServiceProvider = ServiceProvider = (function() {
   ServiceProvider.prototype.create_login_request_url = function(identity_provider, options, cb) {
     var id, ref1, xml;
     options = set_option_defaults(options, identity_provider.shared_options, this.shared_options);
-    ref1 = create_authn_request(this.entity_id, this.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format), id = ref1.id, xml = ref1.xml;
+    ref1 = create_authn_request(this.entity_id, options.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format), id = ref1.id, xml = ref1.xml;
     return zlib.deflateRaw(xml, (function(_this) {
       return function(err, deflated) {
         var ex, uri;
@@ -739,7 +739,7 @@ module.exports.ServiceProvider = ServiceProvider = (function() {
   ServiceProvider.prototype.create_authn_request_xml = function(identity_provider, options) {
     var id, ref1, xml;
     options = set_option_defaults(options, identity_provider.shared_options, this.shared_options);
-    ref1 = create_authn_request(this.entity_id, this.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format), id = ref1.id, xml = ref1.xml;
+    ref1 = create_authn_request(this.entity_id, options.assert_endpoint, identity_provider.sso_login_url, options.force_authn, options.is_passive, options.auth_context, options.nameid_format), id = ref1.id, xml = ref1.xml;
     return sign_authn_request(xml, this.private_key, options);
   };
 
